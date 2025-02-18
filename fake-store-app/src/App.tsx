@@ -1,17 +1,37 @@
-// App.tsx atualizado (sem useEffect)
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './contexts/CartContext';
+import { AuthProvider } from './contexts/AuthContext';
 import Home from './pages/Home';
+import Cart from './pages/Cart';
+import Login from './pages/Login';
+import Navbar from './components/Navbar';
+import ProductDetails from './pages/ProductDetails';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <h1>Fake Store App</h1>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </div>
+      <AuthProvider>
+        <CartProvider>
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
+              <Route 
+                path="/cart" 
+                element={
+                  <ProtectedRoute>
+                    <Cart />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </div>
+        </CartProvider>
+      </AuthProvider>
     </Router>
   );
 }
