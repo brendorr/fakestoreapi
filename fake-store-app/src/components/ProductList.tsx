@@ -4,13 +4,20 @@ import ProductCard from './ProductCard';
 
 interface ProductListProps {
   products: Product[];
+  isPopular?: boolean;
+  isTopRated?: boolean;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ products }) => {
+const ProductList: React.FC<ProductListProps> = ({ products, isPopular, isTopRated }) => {
   return (
     <div className="product-list">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard 
+          key={product.id} 
+          product={product}
+          isPopular={isPopular}
+          isTopRated={isTopRated}
+        />
       ))}
     </div>
   );

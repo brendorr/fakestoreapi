@@ -47,3 +47,25 @@
   font-size: 2rem;
   margin: 20px 0;
 }
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: white;
+  z-index: 1;
+}
+
+.product-card {
+  position: relative; 
+}
+
+.product-rating {
+  margin: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
