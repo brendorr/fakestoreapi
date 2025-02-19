@@ -21,5 +21,10 @@ export const getProductsByCategory = async (category: string) => {
   return response.data;
 };
 
+export const getCarts = async () => {
+  const response = await api.get('/carts');
+  return response.data;
+};
+
 
 export default api;

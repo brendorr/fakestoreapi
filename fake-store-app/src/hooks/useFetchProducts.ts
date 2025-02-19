@@ -1,26 +1,33 @@
 import { useEffect, useState } from 'react';
-import { getProducts } from '../services/api';
 import { Product } from '../types/product';
+import { getProducts, getCarts } from '../services/api'; 
+import { Cart } from '../types/cart'; 
 
 export const useFetchProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [carts, setCarts] = useState<Cart[]>([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getProducts();
-        setProducts(data);
+        const [productsData, cartsData] = await Promise.all([
+          getProducts(),
+          getCarts(), 
+        ]);
+        
+        setProducts(productsData);
+        setCarts(cartsData);
       } catch (err) {
-        setError('Erro ao carregar produtos.');
+        setError('Erro ao carregar dados.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
+    fetchData();
   }, []);
 
-  return { products, loading, error };
+  return { products, carts, loading, error }; 
 };
