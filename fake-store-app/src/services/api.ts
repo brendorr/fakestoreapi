@@ -16,4 +16,10 @@ export const getProductById = async (id: number) => {
 };
 
 
+export const getProductsByCategory = async (category: string) => {
+  const response = await api.get(`/products/category/${category}`);
+  return response.data;
+};
+
+
 export default api;
