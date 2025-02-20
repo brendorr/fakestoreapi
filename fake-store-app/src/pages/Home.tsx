@@ -19,12 +19,14 @@ const Home = () => {
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 400,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    autoplay: true,        
+    autoplaySpeed: 5000,   
     responsive: [
       {
         breakpoint: 768,
@@ -42,7 +44,7 @@ const Home = () => {
     <div className="home-page">
       <div className="carousels-container">
         <div className="carousel-item">
-        <h2>{t('productsFeatured')}</h2>
+        <h2>{t('productsFeatured')+'🔥'}</h2>
           <Slider {...sliderSettings}>
             {popularProducts.map(product => (
               <div key={product.id}>
@@ -52,7 +54,7 @@ const Home = () => {
           </Slider>
         </div>
         <div className="carousel-item">
-        <h2>{t('topRateds')}</h2>
+        <h2>{t('topRateds')+'🏆'}</h2>
           <Slider {...sliderSettings}>
             {topRatedProducts.map(product => (
               <div key={product.id}>
