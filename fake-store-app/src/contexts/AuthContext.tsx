@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-
-// authcontext.tsx
+import { loginUser } from '../services/api';
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -17,15 +16,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (username: string, password: string) => {
     try {
-      const response = await fetch('https://fakestoreapi.com/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await response.json();
+      const data = await loginUser(username, password);
       if (data.token) {
         localStorage.setItem('token', data.token);
-        localStorage.setItem('user', username); // Armazena o usuário no localStorage
+        localStorage.setItem('user', username);
         setUser(username);
         setIsAuthenticated(true);
       }

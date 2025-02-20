@@ -5,9 +5,9 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      welcome: "Welcome to FakeStore",
-      login: "Login",
-      logout: "Logout",
+      "welcome": "Welcome to FakeStore",
+      "login": "Login",
+      "logout": "Logout",
       "cart": "Cart",
       "productsFeatured": "Trending",
       "topRateds": "Top Rated",
@@ -37,9 +37,9 @@ const resources = {
   },
   pt: {
     translation: {
-      welcome: "Bem-vindo à FakeStore",
-      login: "Entrar",
-      logout: "Sair",
+      "welcome": "Bem-vindo à FakeStore",
+      "login": "Entrar",
+      "logout": "Sair",
       "cart": "Carrinho",
       "productsFeatured": "Produtos em Destaque",
       "topRateds": "Melhores Avaliados",

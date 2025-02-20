@@ -26,5 +26,14 @@ export const getCarts = async () => {
   return response.data;
 };
 
+export const loginUser = async (username: string, password: string) => {
+  const response = await fetch('https://fakestoreapi.com/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password }),
+  });
+  return await response.json();
+};
+
 
 export default api;

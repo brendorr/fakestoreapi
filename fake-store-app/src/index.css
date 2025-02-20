@@ -13,44 +13,6 @@ body {
 }
 
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #333;
-  color: #fff;
-}
-
-.nav-brand a {
-  font-size: 1.5rem;
-  color: #fff;
-  text-decoration: none;
-}
-
-.nav-categories,
-.nav-actions {
-  display: flex;
-  gap: 1rem;
-}
-
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.nav-link:hover {
-  color: #ffd700;
-}
-
-button.nav-link {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font: inherit;
-}
-
 
 .badge {
   display: inline-block;
@@ -298,3 +260,54 @@ button.nav-link {
 }
 
 
+/* Estilos gerais da Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+}
+
+/* Estilização do botão de menu mobile */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Responsivo para telas menores */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block; /* Mostra o botão do menu */
+  }
+
+  .nav-links {
+    display: none; /* Esconde os links */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px;
+  }
+
+  .nav-links.open {
+    display: flex; /* Exibe quando o menu estiver aberto */
+  }
+}

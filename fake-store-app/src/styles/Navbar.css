@@ -31,6 +31,12 @@
     color: white;
     cursor: pointer;
   }
+
+  .nav-categories,
+.nav-actions {
+  display: flex;
+  gap: 1rem;
+}
   
 
   @media (max-width: 768px) {
