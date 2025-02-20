@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const categories = [
   { name: 'all', label: 'Todos os Produtos' },
@@ -10,6 +11,14 @@ const categories = [
 ];
 
 const Navbar = () => {
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); 
+    navigate('/'); 
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-brand">
@@ -30,7 +39,11 @@ const Navbar = () => {
 
       <div className="nav-actions">
         <Link to="/cart" className="nav-link">Carrinho</Link>
-        <Link to="/login" className="nav-link">Login</Link>
+        {isAuthenticated ? (
+          <button onClick={handleLogout} className="nav-link">Logout</button>
+        ) : (
+          <Link to="/login" className="nav-link">Login</Link>
+        )}
       </div>
     </nav>
   );
