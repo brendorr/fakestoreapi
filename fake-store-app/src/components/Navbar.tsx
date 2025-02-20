@@ -1,28 +1,35 @@
+// src/components/Navbar.tsx
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const categories = [
-  { name: 'all', label: 'Todos os Produtos' },
-  { name: 'electronics', label: 'Eletrônicos' },
-  { name: 'jewelery', label: 'Joias' },
-  { name: "men's clothing", label: 'Roupas Masculinas' },
-  { name: "women's clothing", label: 'Roupas Femininas' }
+  { name: 'all', key: 'categories.all' },
+  { name: 'electronics', key: 'categories.electronics' },
+  { name: 'jewelery', key: 'categories.jewelery' },
+  { name: "men's clothing", key: 'categories.mens_clothing' },
+  { name: "women's clothing", key: 'categories.womens_clothing' }
 ];
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const handleLogout = () => {
-    logout(); 
-    navigate('/'); 
+    logout();
+    navigate('/');
+  };
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
   };
 
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <Link to="/">FakeStore</Link>
+        <Link to="/">{t('welcome')}</Link>
       </div>
       
       <div className="nav-categories">
@@ -32,18 +39,23 @@ const Navbar = () => {
             to={`/category/${category.name}`}
             className="nav-link"
           >
-            {category.label}
+            {t(category.key)}
           </Link>
         ))}
       </div>
 
       <div className="nav-actions">
-        <Link to="/cart" className="nav-link">Carrinho</Link>
+        <Link to="/cart" className="nav-link">{t('cart')}</Link>
         {isAuthenticated ? (
-          <button onClick={handleLogout} className="nav-link">Logout</button>
+          <button onClick={handleLogout} className="nav-link">{t('logout')}</button>
         ) : (
-          <Link to="/login" className="nav-link">Login</Link>
+          <Link to="/login" className="nav-link">{t('login')}</Link>
         )}
+        {/* Seletor de idioma */}
+        <div>
+          <button onClick={() => changeLanguage('pt')}>PT</button>
+          <button onClick={() => changeLanguage('en')}>EN</button>
+        </div>
       </div>
     </nav>
   );

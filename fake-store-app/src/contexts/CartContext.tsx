@@ -20,7 +20,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const { user } = useAuth();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  // Carrega o carrinho do usuário ao montar ou quando o usuário muda
   useEffect(() => {
     if (user) {
       const savedCart = localStorage.getItem(`cart_${user}`);
@@ -30,12 +29,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setCartItems([]);
       }
     } else {
-      // Se não houver usuário, limpa o carrinho
       setCartItems([]);
     }
   }, [user]);
 
-  // Salva o carrinho no localStorage sempre que ele for atualizado
   useEffect(() => {
     if (user) {
       localStorage.setItem(`cart_${user}`, JSON.stringify(cartItems));
@@ -43,6 +40,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [cartItems, user]);
 
   const addToCart = (product: Product) => {
+    const audio = new Audio('/sounds/purchase.wav');
+    audio.play().catch((err) => console.error('Erro ao reproduzir o som:', err));
+
     setCartItems(prev => {
       const existing = prev.find(item => item.id === product.id);
       return existing 

@@ -7,11 +7,14 @@ import { getTopRatedProducts } from '../utils/getTopRatedProducts';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { NextArrow, PrevArrow } from '../components/Arrows'; 
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const { products, carts, loading, error } = useFetchProducts();
   const popularProducts = getPopularProducts(products, carts);
   const topRatedProducts = getTopRatedProducts(products);
+  const { t } = useTranslation();
 
   const sliderSettings = {
     dots: true,
@@ -19,6 +22,9 @@ const Home = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 768,
@@ -34,23 +40,28 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <h1>🔥 Produtos em Destaque</h1>
-      <Slider {...sliderSettings}>
-        {popularProducts.map(product => (
-          <div key={product.id}>
-            <ProductCard product={product} isPopular={true} />
-          </div>
-        ))}
-      </Slider>
-
-      <h1>🏆 Melhores Avaliados</h1>
-      <Slider {...sliderSettings}>
-        {topRatedProducts.map(product => (
-          <div key={product.id}>
-            <ProductCard product={product} isTopRated={true} />
-          </div>
-        ))}
-      </Slider>
+      <div className="carousels-container">
+        <div className="carousel-item">
+        <h2>{t('productsFeatured')}</h2>
+          <Slider {...sliderSettings}>
+            {popularProducts.map(product => (
+              <div key={product.id}>
+                <ProductCard product={product} isPopular={true} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+        <div className="carousel-item">
+        <h2>{t('topRateds')}</h2>
+          <Slider {...sliderSettings}>
+            {topRatedProducts.map(product => (
+              <div key={product.id}>
+                <ProductCard product={product} isTopRated={true} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
     </div>
   );
 };
