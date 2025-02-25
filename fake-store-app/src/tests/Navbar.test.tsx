@@ -3,7 +3,7 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import Navbar from '../components/Navbar';
 import { BrowserRouter } from 'react-router-dom';
 
-// Mocks para o AuthContext
+
 const mockLogout = jest.fn();
 const mockUseAuth = {
   isAuthenticated: true,
@@ -35,14 +35,14 @@ jest.mock('react-i18next', () => ({
   }),
 }));
 
-// Mock para o react-router-dom (useNavigate)
+
 const navigateMock = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => navigateMock,
 }));
 
-// Função auxiliar para renderizar o componente com BrowserRouter
+
 const renderWithRouter = (ui: React.ReactElement) => {
   return render(ui, { wrapper: BrowserRouter });
 };
@@ -80,14 +80,14 @@ describe('Navbar Component', () => {
     const toggleButton = screen.getByRole('button', { name: /☰/i });
     const navMenu = screen.getByRole('navigation').querySelector('.nav-menu');
 
-    // Inicialmente, o menu não deve conter a classe 'open'
+
     expect(navMenu).not.toHaveClass('open');
 
-    // Ao clicar, o menu deve abrir (classe 'open' adicionada)
+
     fireEvent.click(toggleButton);
     expect(navMenu).toHaveClass('open');
 
-    // Ao clicar novamente, o menu deve fechar
+
     fireEvent.click(toggleButton);
     expect(navMenu).not.toHaveClass('open');
   });
@@ -98,10 +98,10 @@ describe('Navbar Component', () => {
     const logoutButton = screen.getByText('Logout');
     fireEvent.click(logoutButton);
 
-    // Verifica se a função de logout foi chamada
+
     expect(mockLogout).toHaveBeenCalled();
 
-    // Verifica se a navegação ocorreu para "/"
+
     expect(navigateMock).toHaveBeenCalledWith('/');
   });
 

@@ -73,10 +73,10 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'pt', // idioma padrão
-    fallbackLng: 'pt', // idioma de reserva caso a tradução não seja encontrada
+    lng: 'pt', 
+    fallbackLng: 'pt', 
     interpolation: {
-      escapeValue: false, // React já faz a sanitização
+      escapeValue: false, 
     },
   });
 
